@@ -1,6 +1,6 @@
 <?php 
 require __DIR__ . '/vendor/autoload.php';
-// header("Content-Type: application/json");
+// header("Content-Type: application/json"); 
 // include "Pusher.php";
 
  include("connect.php");
@@ -14,7 +14,7 @@ $socket_id = $_SESSION['socket'];
         $find = mysqli_fetch_assoc($query);
         $userName = $find['name'];
         $userId = $find['id'];
-        $channel = "stephen";
+        $channel = "stephen_Black";
            $options = array(
     'cluster' => 'mt1',
     'useTLS' => true
@@ -26,10 +26,12 @@ $socket_id = $_SESSION['socket'];
         $options
         );
        
-        
+        $presence_data = array('id'=>$userId, 'name'=> $find['name']);
     
-         $pusher->presence_auth($channel,  $socket_id,  $userId,  $userName);
-        echo $userName;
+        $pusher->presence_auth($channel,  $socket_id, $_SESSION['user_id'],  $presence_data);
+         
+
+      
     }
     
     

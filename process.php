@@ -39,9 +39,9 @@ include("log.php");
 
    <section class="steve">
      <div class="dog" id="dog">
-       <!-- <aside class="inside">
+       <aside class="inside" id="members">
 
-       </aside> -->
+       </aside>
 
        
 
@@ -53,8 +53,7 @@ include("log.php");
 
 </body>
 <script>
- 
-
+    $(document).ready(function(){
     // var pusher = new Pusher('93446f0926d274083738', {
     //   cluster: 'us2'
     // });
@@ -126,19 +125,20 @@ Pusher.logToConsole = true;
 var pusher = new Pusher('2fcf24fa16eb9c680aa3', {
       cluster: 'mt1'
     });
-var presenceChannel = pusher.subscribe("stephen");
+var presenceChannel = pusher.subscribe("stephen_Black");
+
   var socket = null;
-presenceChannel.bind("pusher:subscription_succeeded", function(members){ 
-  members.each(addUser);
+presenceChannel.bind("pusher:subscription_succeeded", function(member){ 
+ console.log(member.count)
  socket = pusher.connection.socket;
 });
-presence.bind('pusher:member_added', addUser);
+
 // PresenceChannel.members.each(function(member) {  
 //   socket = pusher.connection.socket;
 //   var userId = member.id;
 //   var userInfo = member.info;
 // });
-
+})
 
 </script>
 </html>
