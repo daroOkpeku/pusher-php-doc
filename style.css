@@ -1,0 +1,60 @@
+.content {
+  display: flex;
+}
+
+.all {
+  transform: translateY(5%);
+  margin: auto;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  color: goldenrod;
+  width: 300px;
+  border: 0.2px solid black;
+  padding: 2rem;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 5px 10px 15px rgb(0, 0, 0, 0.2);
+}
+
+input {
+  padding: 0.5rem;
+  width: 200px;
+  border: 0.7 solid;
+  border-left-color: rgba(218, 165, 32, 0.63);
+  outline: none;
+  border-radius: 4px 4px 4px 4px;
+}
+
+.form {
+  margin: 5px;
+}
+
+.click {
+  padding: 0.5rem;
+  background-color: rgba(218, 165, 32, 0.774);
+  color: white;
+  width: 100px;
+  outline: none;
+  border: none;
+  border-radius: 2px 2px 2px 2px;
+  transition: ease-in-out 0.2s;
+}
+
+.click:hover {
+  color: rgba(218, 165, 32, 0.76);
+  background-color: transparent;
+}
+
+.side {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: goldenrod;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
