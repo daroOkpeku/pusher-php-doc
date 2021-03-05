@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php 
 session_start();
-include("home.php");
+ 
+$userName  = $_SESSION['name'];
 
 include("log.php");
 // include("display.php");
@@ -54,23 +55,6 @@ include("log.php");
 </body>
 <script>
     $(document).ready(function(){
-    // var pusher = new Pusher('93446f0926d274083738', {
-    //   cluster: 'us2'
-    // });
-    // var channel = pusher.subscribe('stephen');
-  //  channel.bind('look', function(data){
-  //       // console.log(data)
-      
-  //   })
-
-    //  var pusher = new Pusher('93446f0926d274083738', {
-    //   cluster: 'us2'
-    // });
-
-    // var channel = pusher.subscribe('starwars');
-    // channel.bind('skyWalker', function(data) {
-    //   console.log(data);
-    // });
 //      $.ajax({
 //     method: "GET",
 //     url: "user_config.php",
@@ -81,13 +65,6 @@ include("log.php");
 //     }
 
 // })
-
-    
-  
-    // var channel = pusher.subscribe('stephen');
-    // channel.bind('luke_man', function(data) {
-    //    console.log(data)
-    // })
 // $(document).ready(function(){
 //   $.ajax({
 //     method: "GET",
@@ -122,22 +99,14 @@ include("log.php");
 //  })
 /** all this code from here is working  */
 Pusher.logToConsole = true;
-var pusher = new Pusher('2fcf24fa16eb9c680aa3', {
-      cluster: 'mt1'
-    });
-var presenceChannel = pusher.subscribe("stephen_Black");
-
-  var socket = null;
-presenceChannel.bind("pusher:subscription_succeeded", function(member){ 
- console.log(member.count)
- socket = pusher.connection.socket;
+var pusher = new Pusher('2fcf24fa16eb9c680aa3',{ authEndpoint: 'auth.php',  cluster: 'mt1' });
+     
+var presenceChannel = pusher.subscribe("presence-stephen");
+presenceChannel.bind("pusher:subscription_succeeded", function(members){ 
+ 
 });
 
-// PresenceChannel.members.each(function(member) {  
-//   socket = pusher.connection.socket;
-//   var userId = member.id;
-//   var userInfo = member.info;
-// });
+
 })
 
 </script>
