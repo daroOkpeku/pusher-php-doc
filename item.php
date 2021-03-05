@@ -44,10 +44,10 @@ include("login.php");
 //     });
 
     $(document).ready(function(){
-    var pusher = new Pusher('2fcf24fa16eb9c680aa3')
+        // { authEndpoint: 'auth.php' }
+    var pusher = new Pusher('2fcf24fa16eb9c680aa3');
     var socketId = null;
     pusher.connection.bind('connected', function(data){
-        console.log(data);
     socketId = pusher.connection.socket_id;
   $("input").keyup(function(){
     //    var name = $("#name").val();
@@ -70,7 +70,7 @@ include("login.php");
      
     })
     })
-Pusher.channel_auth_endpoint = "home.php";
+
 
 </script>
 </html>
