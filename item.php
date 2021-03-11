@@ -58,6 +58,7 @@ include("login.php");
         data: {
         //    name:name,
         //    seek:seek,
+           
            socket_id:socketId
         },
         
