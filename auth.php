@@ -13,28 +13,28 @@ $socket_id = $_SESSION['socket'];
         $query = mysqli_query($conn, $sql);
         $find = mysqli_fetch_assoc($query);
         $userName = $find['name'];
+        $email = $find['email'];
         $userId = $find['id'];
-        $channel_name = "presence-stephen";
-          $options = array(
-    'cluster' => 'mt1',
-    'useTLS' => true
-  );
+//           $options = array(
+//     'cluster' => 'mt1',
+//     'useTLS' => true
+//   );
         $pusher = new Pusher\Pusher(
             '2fcf24fa16eb9c680aa3',//app_key
     '18ef0d0c106ac0d2a964',//app_secret
-    '1139482',//app_id
-        $options
+    '1139482'//app_id
+        // $options
         );
        
-        $presence_data = array('id'=>$userId, 'name'=> $find['name']);
+        $presence_data = array( 'name'=> $find['name'], 'email'=>$email,  'status'=>'online');
     
-    echo $pusher->presence_auth($channel_name,  $socket_id, $_SESSION['user_id'],  $presence_data);
+    echo $pusher->presence_auth($_POST['channel_name'], $_POST['socket_id'], $userId, $presence_data);
        
     }
-//     else{
-//   header('', true, 403);
-//   echo( "Forbidden" );
-// }    
+    else{
+  header('', true, 403);
+  echo( "Forbidden" );
+}    
     
     
 // ?>

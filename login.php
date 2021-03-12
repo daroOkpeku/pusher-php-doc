@@ -28,6 +28,7 @@ function clean($string){
            $userId = $fetch['id'];
            $_SESSION['user_id'] = $userId;
            $_SESSION['name'] = $one;
-           header("location:process.php");
+           $joke = " ";
+           header("location:process.php?joke=$joke");
        } 
    } 
