@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php 
+<?php
 session_start();
 $userName  = $_SESSION['name'];
 include("log.php");
@@ -148,12 +148,10 @@ dog.addEventListener('click', function(e){
 
 
   
-var channel = new Pusher('93446f0926d274083738', {
-      cluster: 'us2'
-    });
-var ChannelData = channel.subscribe("starwars");
+var ChannelData = pusher.subscribe("private-starwars");
+console.log(ChannelData)
      ChannelData.bind('jokers-wars', function(data) {
-          console.log(`starwar:${data}`);
+         console.log(data)
        let {user, guest, word} =  data
        let show = ``;
        show =`
@@ -166,23 +164,20 @@ var ChannelData = channel.subscribe("starwars");
     });
   
 
+    
      
-    var pusher1 = new Pusher('31b95d4182f02ed6754b', {
-      cluster: 'eu'
-    });
-
-    var channel1 = pusher1.subscribe('Daro');
-    channel1.bind('jack-ryan', function(data) {
-      console.log(`daro${data}`);
-        let {user, guest, word} =  data
-       let show = ``;
-       show =`
-       <li>
-       <small>${user}</small>
-       <p>${word}</p>
-       <li>`;
-      $(".list").append(show);
-    });
+    // var channel1 = pusher.subscribe('Daro');
+    // channel1.bind('jack-ryan', function(data) {
+    //    console.log(data)
+    //     let {user, guest, word} =  data
+    //    let goat = ``;
+    //    goat =`
+    //    <li>
+    //    <small>${guest}</small>
+    //    <p>${word}</p>
+    //    <li>`;
+    //   $(".list").append(goat);
+    // });
 
 </script>
 </html>

@@ -6,8 +6,6 @@ session_start();
  include("connect.php");
 $_SESSION['name'];
 $_SESSION['user_id'];
-  
-$socket_id = $_SESSION['socket'];
     if (isset($_SESSION['user_id'])) {
         $sql = "SELECT * FROM users WHERE  id='".$_SESSION['user_id']."'";
         $query = mysqli_query($conn, $sql);
@@ -29,7 +27,8 @@ $socket_id = $_SESSION['socket'];
         $presence_data = array( 'name'=> $find['name'], 'email'=>$email,  'status'=>'online');
     
     echo $pusher->presence_auth($_POST['channel_name'], $_POST['socket_id'], $userId, $presence_data);
-       
+    //  echo $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id'], $_SESSION['user_id']);
+    //   $pusher->trigger($_POST['channel_name'], $_POST['socket_id'], array('user' => $user, 'guest'=>$guest, 'word'=>$word ));
     }
     else{
   header('', true, 403);

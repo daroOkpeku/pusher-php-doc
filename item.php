@@ -44,14 +44,12 @@ include("login.php");
 //     });
 
     $(document).ready(function(){
-        // { authEndpoint: 'auth.php' }
     var pusher = new Pusher('2fcf24fa16eb9c680aa3');
     var socketId = null;
     pusher.connection.bind('connected', function(data){
     socketId = pusher.connection.socket_id;
   $("input").keyup(function(){
-    //    var name = $("#name").val();
-    //   var seek = $("#Userpass").val();
+
     $.ajax({
         method: "POST",
         url: "form.php",
