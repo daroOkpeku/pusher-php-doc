@@ -26,19 +26,19 @@ $_SESSION['user_id'];
     '1139482'//app_id
         // $options
         );
-       if (isset($_POST['channel_name']) && isset($_POST['socket_id']) && isset($email) && isset($userName) ) {
-           $presence_data = array( 'name'=> $find['name'], 'email'=>$email,  'status'=>'online');
-    
-           echo $pusher->presence_auth($_POST['channel_name'], $_POST['socket_id'], $userId, $presence_data);
-       }else{
-           header("location:item.php");
-       }
-    // echo $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id'], $userId);
+       
+       
+    if (isset($_POST['channel_name']) && isset($_POST['socket_id']) && isset($email) && isset($userName) ) {
+        $presence_data = array( 'name'=> $find['name'], 'email'=>$email,  'status'=>'online');
+    echo $pusher->presence_auth($_POST['channel_name'], $_POST['socket_id'], $presence_data);
     //  echo $pusher->socket_auth($_POST['channel_name'], $_POST['socket_id'], $_SESSION['user_id']);
     //   $pusher->trigger($_POST['channel_name'], $_POST['socket_id'], array('user' => $user, 'guest'=>$guest, 'word'=>$word ));
+    }else{
+           header("location:item.php");
+       }
     }
     else{
-  header('location:error.php');
+  header('', true, 403);
   echo( "Forbidden" );
 }    
     

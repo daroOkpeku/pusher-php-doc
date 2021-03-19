@@ -26,19 +26,31 @@ $query = mysqli_query($conn, $sql);
 //    $one = $select['user'];
 //    $two = $select['guest'];
 //    $speech = $select['word'];
-   
-   
-      $pusher->trigger('private-starwars', 'jokers-wars', array('user' => $user, 'guest'=>$guest, 'word'=>$word ));
- 
-   
 
-      //  $pusher->trigger('Daro', 'jack-ryan', array( 'user'=>$guest, 'guest'=>$user, 'word'=>$word ));
-   
-    //  $batch = array();
-    //  $batch[] = array('presence-starwars', 'jokers-wars', 'user' => $user,  'word'=>$word );
-    //  $batch[] = array('Daro', 'jack-ryan',  'guest'=>$guest,  'word'=>$word );
-    //  $pusher->triggerBatch($batch)
 
+    
+          
+
+
+//    $channel = ['private-starwars', 'private-two' ];
+//     $data = array(
+//           'channel-name'=> 'private-two',
+//           'initiated_by' => $user,
+//           'chat_with' => $guest
+
+//     );
+      //  $pusher->trigger($channel, 'jokers-wars', $data );
+       
+
+
+        $pusher->trigger('presence-first', 'first', array('user'=>$user, 'word'=>$word));
+    
+        
+         
+
+      //  $pusher->trigger('Daro', 'jack-ryan', array('user'=>$user, 'word'=>$word));
+   
+   
  
 
 ?>

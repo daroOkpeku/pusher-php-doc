@@ -2,6 +2,7 @@
 <?php
 session_start();
 $userName  = $_SESSION['name'];
+$userId = $_SESSION['user_id'];
 include("log.php");
 
 ?>
@@ -50,7 +51,7 @@ include("log.php");
    </section>
 
    <section class="message">
-       <p class="jack" id="jack"><?php echo $_GET['joke']; ?></p>
+       <p class="jack" id="jack"><?php echo $_GET["joke"]?></p>
    <ul class="list">
       
    </ul>
@@ -62,18 +63,39 @@ include("log.php");
 
 </body>
 <script>
+// let kod = document.querySelector(".dog");
+// let hoe = document.querySelector(".top")
+
+// kod.addEventListener('click', function(e){
+//   e.preventDefault();
+//   let item =  e.target.dataset.id 
+//     console.log(item)
+//      $.ajax({
+//         method: "POST",
+//         url: "insert.php",
+//         //  data:{
+//         //     guest:item,
+//         //    user:" <?php echo $userName; ?> "
+//         //   },
+//          dataType: "JSON",
+//           success: function (response) {
+//           }
+// })
+// })
     let btn = document.getElementById("send");
     let input = document.getElementById("word");
-
+    let jack = document.querySelector(".jack");
+    console.log(jack)
     btn.addEventListener("click", function(e){
       e.preventDefault();
+        let item = jack.textContent
        let see = input.value
         $.ajax({
         method: "POST",
         url: "insert.php",
          data:{
          word:see,
-         guest:" <?php echo $_GET['joke']; ?> ",
+         guest:"<?php echo $_GET["joke"]?>",
            user:" <?php echo $userName; ?> "
           },
          dataType: "JSON",
@@ -84,6 +106,7 @@ include("log.php");
           input.value= " ";
           })
 
+
     
 /** all this code from here is working  */
 Pusher.logToConsole = true;
@@ -92,8 +115,7 @@ var pusher = new Pusher('2fcf24fa16eb9c680aa3',{ authEndpoint: 'auth.php',  clus
 var presenceChannel = pusher.subscribe("presence-stephen");
 
 presenceChannel.bind("pusher:subscription_succeeded", function(members){ 
-//  console.log(members)
-
+ 
 presenceChannel.members.each(function(member) {
     addMember(member)
   
@@ -116,7 +138,7 @@ presenceChannel.bind('pusher:member_removed', function(member) {
 });
 
 
-function addMember(member){
+function addMember(member) {
  var userId = member.id;
   var userInfo = member.info;
   var {name, email, status} = userInfo
@@ -130,29 +152,22 @@ function addMember(member){
   $("#dog").append(output)
 
 }
+
 function removeMember (member) { 
     var userId = member.id;
   $(`#${userId}`).remove();
 
 }
+// let dog = document.querySelector(".dog");
+// let mess = document.querySelector(".jack")
 
-let dog = document.querySelector(".dog");
-let mess = document.querySelector(".jack")
-let list = document.querySelector(".list");
-dog.addEventListener('click', function(e){
-  // e.preventDefault();
-  let item =  e.target.dataset.id 
-     mess.innerText = item
-     list.innerHTML =  "";
-})
-
-
-  
-var ChannelData = pusher.subscribe("private-starwars");
-console.log(ChannelData)
-     ChannelData.bind('jokers-wars', function(data) {
-         console.log(data)
-       let {user, guest, word} =  data
+// dog.addEventListener('click', function(e){
+//   e.preventDefault();
+//   mess.textContent = e.target.dataset.id
+// })
+var channel3 = pusher.subscribe("presence-first");
+channel3.bind("first", function(data){
+         let {user, guest, word} =  data
        let show = ``;
        show =`
        <li>
@@ -160,8 +175,95 @@ console.log(ChannelData)
        <p>${word}</p>
        <li>`;
       $(".list").append(show);
+})
+
+  //  Pusher.channel_auth_endpoint = "auth.php";
+    
+    var APP_KEY = '2fcf24fa16eb9c680aa3';
+    var Pusher = new Pusher(APP_KEY, { authEndpoint: 'private_auth.php',  cluster: 'mt1' });
+    var channel = Pusher.subscribe('presence-destination');
+    console.log(channel)
+    channel.bind('pusher:subscription_succeeded', function(member) {
+     channel.members.each(function(member) {
+   
+  
+});
+    
+
+    
+      // var el = document.getElementById('subscription_status');
+      // el.innerText = 'Subscribed!';
+      // el.className = 'subscribed';
+
+      //  let {user, guest, word} =  data
+      //  let show = ``;
+      //  show =`
+      //  <li>
+      //  <small>${user}</small>
+      //  <p>${word}</p>
+      //  <li>`;
+      // $(".list").append(show);
       
     });
+
+     var channel2 = Pusher.subscribe("presence-drive");
+     channel2.bind("Justice", function(data){
+           console.log(data)
+            let {user, guest, word} =  data
+       let show = ``;
+       show =`
+       <li>
+       <small>${user}</small>
+       <p>${word}</p>
+       <li>`;
+      $(".list").append(show);
+     })
+    
+    // for debugging purposes. Not required.
+    // Pusher.log = function(msg) {
+    //   if(window.console && window.console.log) {
+    //     window.console.log(msg);
+    //   }
+      
+    //   // var el = document.createElement('div');
+    //   // el.innerText = msg;
+    //   // document.getElementById('debug').appendChild(el);
+    // }
+
+  
+// var ChannelData = pusher.subscribe("private-starwars");
+// var privateChat ={};
+//  ChannelData.bind('jokers-wars', function(data) {
+
+// if(data.initiated_by === "<?php echo $userId; ?>" && expectingChatWith( data.chat_with )){
+//    startPrivateChat( data.chat_with, data.channel-name );
+// }else if( data.chat_with === "<?php echo $userId; ?>" ) {
+//     // Prompt the user
+//     // Note: more user info required
+//     displayChatPrompt( data );
+//   }
+//  });
+
+//  function startPrivateChat( withUserId, channelName ) {
+//   privateChat[ withUserId ] = pusher.subscribe( channelName );
+//   console.log(privateChat)
+
+// }
+
+ 
+//  var ChannelData = pusher.subscribe("private-starwars");
+//      ChannelData.bind('jokers-wars', function(data) {
+//          console.log(data)
+//        let {user, guest, word} =  data
+//        let show = ``;
+//        show =`
+//        <li>
+//        <small>${user}</small>
+//        <p>${word}</p>
+//        <li>`;
+//       $(".list").append(show);
+      
+//     });
   
 
     
@@ -169,11 +271,11 @@ console.log(ChannelData)
     // var channel1 = pusher.subscribe('Daro');
     // channel1.bind('jack-ryan', function(data) {
     //    console.log(data)
-    //     let {user, guest, word} =  data
+    //     let {user,  word} =  data
     //    let goat = ``;
     //    goat =`
     //    <li>
-    //    <small>${guest}</small>
+    //    <small>${user}</small>
     //    <p>${word}</p>
     //    <li>`;
     //   $(".list").append(goat);
