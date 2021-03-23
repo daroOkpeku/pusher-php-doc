@@ -11,3 +11,4 @@ bar.addEventListener('click', function (e) {
     }
 });
 
+// https://github.com/leggetter/pusher-examples/tree/master/php/authentication/src
